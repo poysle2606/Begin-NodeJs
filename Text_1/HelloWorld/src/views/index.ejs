@@ -52,12 +52,11 @@
                                 <%= dataBlogger[i].status %>
                             </td>
                             <td>
-                                <button class="btn btn-primary">
+                                <a class="btn btn-primary" href="/blog/edit-form/<%= dataBlogger[i].id %>">
                                     Edit
-                                </button>
-                                <a class="btn btn-success" href="/detail/<%= dataBlogger[i].id %>"
-                                    target="_blank">Detail</a>
-
+                                </a>
+                                <a class="btn btn-success" href="/blog/detail/<%= dataBlogger[i].id %>">
+                                    Detail</a>
                                 <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                     data-id="<%= dataBlogger[i].id %>">
                                     Delete
@@ -103,7 +102,6 @@
         let button = event.relatedTarget
         // Extract info from data-bs-* attributes
         deleteId = button.getAttribute('data-id')
-        console.log(deleteId);
     })
 
     btnDeleteModal.onclick = function () {

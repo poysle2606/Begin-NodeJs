@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Blog</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/src/public/css/style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -18,23 +19,24 @@
         <a href="#contact">Contact</a>
         <a href="#about">About</a>
     </div>
-    <h1>Create Blog</h1>
+    <h1>Update Blog</h1>
     <div class="container mt-4" style="width: 40%; height: 300px; background-color: #ffff;">
-        <form method="post" action="/blog/create-blog">
+        <form method="post" action="/blog/update-blog">
+            <input type="number" value="<%= dataBlogger.id %>" name="id" hidden>
             <div>
                 <label for="name">Name Blog :</label>
-                <input class="form-control" type="text" name="name">
+                <input class="form-control" type="text" name="name" value="<%= dataBlogger.name %>">
             </div>
             <div>
                 <label for="singer">Content :</label>
-                <input class="form-control" type="text" name="content">
+                <input class="form-control" type="text" name="content" value=" <%= dataBlogger.content %>">
             </div>
             <div>
                 <label for="typeMusic">Status :</label>
-                <input class="form-control" type="text" name="status">
+                <input class="form-control" type="text" name="status" value="<%= dataBlogger.status %>">
             </div>
 
-            <button type=" submit" class="btn btn-outline-success mt-2" style=" width: 100%;">Create</button>
+            <button type=" submit" class="btn btn-outline-success mt-2" style=" width: 100%;">Update</button>
 
         </form>
         <a href="/blog/" class="btn btn-outline-success mt-2 d-flex justify-content-center">

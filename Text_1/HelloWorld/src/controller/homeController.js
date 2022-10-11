@@ -8,12 +8,6 @@ let getHomePage = async (req, res) => {
     return res.render('index.ejs', { dataBlogger: row })
 }
 
-let getDetailPage = async (req, res) => {
-    let id = req.params.id;
-    let [blogger, fields] = await pool.execute('select * from `blogger` where id = ?', [id]);
-    return res.send(JSON.stringify(blogger))
-}
-
 let createPage = async (req, res) => {
     const [row, fields] = await pool.execute('SELECT * FROM `blogger`');
 
@@ -30,11 +24,29 @@ let createNewBlog = async (req, res) => {
 
 let detelePage = async (req, res) => {
     let blogId = req.params.id;
-    console.log(1111);
-    console.log(blogId);
     await pool.execute('delete from blogger where id = ?', [blogId])
     return res.redirect('/blog/')
 }
+
+let editFormPage = async (req, res) => {
+    let blogId = req.params.id;
+    let [blog] = await pool.execute('select * from blogger where id = ?', [blogId]);
+    return res.render('edit.ejs', { dataBlogger: blog[0] });
+}
+
+let updatePage = async (req, res) => {
+    let { name, content, status, id } = req.body;
+    await pool.execute('update blogger set name = ?, content = ?, status = ? where id = ?',
+        [name, content, status, id]);
+    return res.redirect('/blog/');
+}
+
+let detailPage = async (req, res) => {
+    let blogId = req.params.id;
+    console.log(blogId);
+    let [blog] = await pool.execute('select * from blogger where id = ?', [blogId]);
+    return res.render('detail.ejs', { dataBlogger: blog[0] });
+}
 module.exports = {
-    getHomePage, getDetailPage, createPage, createNewBlog, detelePage
+    getHomePage, createPage, createNewBlog, detelePage, editFormPage, updatePage, detailPage
 }
